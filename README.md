@@ -1,0 +1,2 @@
+# MagicReader
+ Android project MagicReader
