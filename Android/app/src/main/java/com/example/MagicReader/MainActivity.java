@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION_REQUEST = 1001;
 
     private MainActivityUIController mainActivityUIController;
-
+    private MainActivityVoiceController mainActivityVoiceController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // create a UI controller instance for this activity
         // this UI controller should be associated with only this activity
         mainActivityUIController = new MainActivityUIController(this);
+        mainActivityVoiceController = new MainActivityVoiceController(this);
     }
 
     @Override
@@ -49,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         // UI controller resumes the UI and this activity is visible in the foreground.
         mainActivityUIController.resume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mainActivityVoiceController.shutdown();
     }
 
     @Override
@@ -62,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_gallery:
                 mainActivityUIController.updateResultView(getString(R.string.result_placeholder));
                 ImageActions.startGalleryActivity(this, SELECT_IMAGE_CODE);
+                return true;
+            case R.id.action_voice:
+                mainActivityVoiceController.readResult();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

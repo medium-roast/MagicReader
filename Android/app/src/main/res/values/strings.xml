@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">MagicReader</string>
+    <string name="voice_button">Read the result text</string>
     <string name="capture_button">Take a photo</string>
     <string name="gallery_button">Choose a photo from gallery</string>
     <string name="hello_world">Hello world!</string>

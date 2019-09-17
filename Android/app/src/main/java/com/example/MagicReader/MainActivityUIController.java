@@ -52,12 +52,12 @@ public class MainActivityUIController {
         builder.setTitle(R.string.error_dialog_title);
         builder.setMessage(messageStringID);
         builder.setPositiveButton(R.string.error_dialog_dismiss_button,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
         builder.show();
     }
 
