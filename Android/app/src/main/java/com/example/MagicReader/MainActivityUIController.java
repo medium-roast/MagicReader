@@ -45,6 +45,7 @@ public class MainActivityUIController {
 
     public void updateImageViewWithBitmap(Bitmap bitmap) {
         imageView.setImageBitmap(bitmap);
+        imageView.setContentDescription(activity.getString(R.string.image_sent));
     }
 
     public void showErrorDialogWithMessage(int messageStringID) {

@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
     <TextView
         android:id="@+id/resultView"
         android:layout_width="wrap_content"
@@ -15,6 +15,9 @@
         android:layout_alignParentBottom="true" />
     <ImageView
         android:id="@+id/capturedImage"
+        android:contentDescription="@string/image_not_selected"
+        android:focusable ="true"
+        android:background ="@android:color/background_dark"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@id/resultView"/>
