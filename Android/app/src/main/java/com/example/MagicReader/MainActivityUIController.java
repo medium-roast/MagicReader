@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,26 +23,48 @@ public class MainActivityUIController {
     private final Activity activity;
     private final Handler mainThreadHandler;
 
-    private TextView resultView;
+    private Button resultView;
     private ImageView imageView;
+    private String lastResult;
 
     public MainActivityUIController(Activity activity) {
         this.activity = activity;
         this.mainThreadHandler = new Handler(Looper.getMainLooper());
+        lastResult = activity.getString(R.string.result_placeholder);
+    }
+
+    public void announceRecognitionResult() {
+        mainThreadHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setTitle(R.string.recognition_dialog_title);
+                builder.setMessage(lastResult);
+                builder.setPositiveButton(R.string.error_dialog_dismiss_button,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                builder.show();
+            }
+        });
     }
 
     public void resume() {
         resultView = activity.findViewById(R.id.resultView);
         imageView = activity.findViewById(R.id.capturedImage);
-    }
-
-    public void updateResultView(final String text) {
-        mainThreadHandler.post(new Runnable() {
+        resultView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                resultView.setText(text);
+            public void onClick(View view) {
+                announceRecognitionResult();
             }
         });
+    }
+
+    public void updateResultText(final String text) {
+        lastResult = text;
     }
 
     public void updateImageViewWithBitmap(Bitmap bitmap) {

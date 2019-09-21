@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // create a UI controller instance for this activity
         // this UI controller should be associated with only this activity
         mainActivityUIController = new MainActivityUIController(this);
-        mainActivityVoiceController = new MainActivityVoiceController(this);
+//        mainActivityVoiceController = new MainActivityVoiceController(this);
     }
 
     @Override
@@ -62,16 +62,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_capture:
-                mainActivityUIController.updateResultView(getString(R.string.result_placeholder));
+//                mainActivityUIController.updateResultView(getString(R.string.result_placeholder));
                 mainActivityUIController.askForPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_REQUEST);
                 ImageActions.startCameraActivity(this, IMAGE_CAPTURE_CODE);
                 return true;
             case R.id.action_gallery:
-                mainActivityUIController.updateResultView(getString(R.string.result_placeholder));
+//                mainActivityUIController.updateResultView(getString(R.string.result_placeholder));
                 ImageActions.startGalleryActivity(this, SELECT_IMAGE_CODE);
-                return true;
-            case R.id.action_voice:
-                mainActivityVoiceController.readResult();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -130,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             HttpURLConnection conn = HttpUtilities.makeHttpPostConnectionToUploadImage(bitmap, UPLOAD_HTTP_URL);
             conn.connect();
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                mainActivityUIController.updateResultView(HttpUtilities.parseOCRResponse(conn));
+                mainActivityUIController.updateResultText(HttpUtilities.parseOCRResponse(conn));
             } else {
                 mainActivityUIController.showInternetError();
             }
