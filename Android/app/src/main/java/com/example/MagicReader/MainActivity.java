@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION_REQUEST = 1001;
 
     private MainActivityUIController mainActivityUIController;
-    private MainActivityVoiceController mainActivityVoiceController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         // create a UI controller instance for this activity
         // this UI controller should be associated with only this activity
         mainActivityUIController = new MainActivityUIController(this);
-//        mainActivityVoiceController = new MainActivityVoiceController(this);
     }
 
     @Override
@@ -53,21 +51,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mainActivityVoiceController.shutdown();
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_capture:
-//                mainActivityUIController.updateResultView(getString(R.string.result_placeholder));
+                mainActivityUIController.updateResultText(getString(R.string.result_placeholder));
                 mainActivityUIController.askForPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_REQUEST);
                 ImageActions.startCameraActivity(this, IMAGE_CAPTURE_CODE);
                 return true;
             case R.id.action_gallery:
-//                mainActivityUIController.updateResultView(getString(R.string.result_placeholder));
+                mainActivityUIController.updateResultText(getString(R.string.result_placeholder));
                 ImageActions.startGalleryActivity(this, SELECT_IMAGE_CODE);
                 return true;
             default:
