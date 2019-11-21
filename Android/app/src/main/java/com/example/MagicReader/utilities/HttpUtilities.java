@@ -79,7 +79,6 @@ public class HttpUtilities {
             reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                Log.e("CheckUTF-8", line);
                 builder.append(line);
             }
         } catch (IOException e) {

@@ -9,6 +9,7 @@
     <string name="result_placeholder">No recognition result yet.</string>
     <string name="permission_denied_message">We will not be able to process photos because permission is denied.</string>
     <string name="reading_error_message">Error reading image from your gallery, please try again.</string>
+    <string name="capturing_error_message">Error capturing image, please try again.</string>
     <string name="internet_error_message">Error sending image to server, please try again.</string>
     <string name="error_dialog_title">Alert</string>
     <string name="error_dialog_dismiss_button">OK</string>

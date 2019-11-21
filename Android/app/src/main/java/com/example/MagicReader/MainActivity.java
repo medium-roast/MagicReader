@@ -24,7 +24,7 @@ import java.net.HttpURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String UPLOAD_HTTP_URL = "Your server url";
+    private static final String UPLOAD_HTTP_URL = "your url";
 
     private static final int IMAGE_CAPTURE_CODE = 1;
     private static final int SELECT_IMAGE_CODE = 2;
@@ -89,8 +89,13 @@ public class MainActivity extends AppCompatActivity {
             Bitmap bitmap = null;
             switch (requestCode) {
                 case IMAGE_CAPTURE_CODE:
-                    bitmap = (Bitmap) data.getExtras().get("data");
-                    mainActivityUIController.updateImageViewWithBitmap(bitmap);
+                    Uri capturedImage = ImageActions.getPhotoURI();
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), capturedImage);
+                        mainActivityUIController.updateImageViewWithBitmap(bitmap);
+                    } catch (IOException e) {
+                        mainActivityUIController.showErrorDialogWithMessage(R.string.capturing_error_message);
+                    }
                     break;
                 case SELECT_IMAGE_CODE:
                     Uri selectedImage = data.getData();
