@@ -4,9 +4,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 thread.start();
             }
         }
+        ImageActions.deletePhotoFile();
     }
 
     private void uploadImage(Bitmap bitmap) {
